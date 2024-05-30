@@ -6,8 +6,8 @@ import main.java.com.magicvet.service.ClientService;
 import main.java.com.magicvet.service.PetService;
 
 public class ApplicationRunner{
-    private static ClientService clientservice = new ClientService();
-    private static PetService petService = new PetService();
+    private static final ClientService clientservice = new ClientService();
+    private static final PetService petService = new PetService();
     public static void run(){
         if(Authenticator.auth()){
             Client client = clientservice.registerNewClient();
@@ -24,6 +24,7 @@ public class ApplicationRunner{
                 }else{
                     System.out.println("Registration finished.");
                 }
+                System.out.println(client);
             }
         }
     }
