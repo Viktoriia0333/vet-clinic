@@ -10,11 +10,17 @@ public class Client {
 
     @Override
     public String toString(){
-        return "Client\n{First name: "+FirstName
-                +", last name: "+LastName
-                +", email: "+email
-                +"}"
-                +"\nPet: "+ pet;
+        //if pet is not null -> print with pet information
+        return pet != null ?"Client:\nFirst name: "+ FirstName
+                +", last name: "+ LastName
+                +", email: "+ email
+                +"\nPet: " + pet
+                //else print that client don`t have pet yet
+                :
+                "Client:\nFirst name: "+ FirstName
+                +", last name: "+ LastName
+                +", email: "+ email
+                +"\nHas no registered pet yet.";
     }
 
     @Override

@@ -1,54 +1,40 @@
 package main.java.com.magicvet.service;
 
 import main.java.com.magicvet.Main;
+import main.java.com.magicvet.model.Cat;
 import main.java.com.magicvet.model.Dog;
 import main.java.com.magicvet.model.Pet;
 
 public class PetService {
-    private static String dog_type = "dog";
+    private final static String dog_type = "dog";
+    private final static String cat_type = "cat";
 
     public Pet registerNewPet(){
-        Pet pet = new Pet();
-        System.out.print("Type (Dog / Cat / Other): ");
+        Pet pet = null;
+        System.out.print("Type (Dog / Cat): ");
         String type = Main.SCANNER.nextLine();
-        pet.setType(type);
-        if (dog_type.equals(type)){
-            pet = buildDog();
-        }else{
+        if (dog_type.equals(type) || cat_type.equals(type)){
             pet = buildPet(type);
+        }else{
+            System.out.println("Unknown pet type "+type);
         }
         return pet;
     }
 
-    private Dog buildDog() {
-        Pet pet = buildPet(dog_type);
-        Dog dog = pettoDog(pet);
-        System.out.println("Size (xs / s / m / l / xxl): ");
-        dog.setSize(Main.SCANNER.nextLine());
-        return dog;
-
-    }
-
-    private Dog pettoDog(Pet pet) {
-        Dog dog = new Dog();
-        dog.setType(pet.getType());
-        dog.setName(pet.getName());
-        dog.setAge(pet.getAge());
-        dog.setGender(pet.getGender());
-        return dog;
-    }
-
     private Pet buildPet(String type){
-        Pet pet = new Pet();
+        Pet pet = type.equals(cat_type) ? new Cat() : new Dog();
         pet.setType(type);
         System.out.print("Name: ");
         pet.setName(Main.SCANNER.nextLine());
         System.out.print("Age:");
-        pet.setAge(Main.SCANNER.nextLine());
+        pet.setAge(Main.SCANNER.nextInt());
+        Main.SCANNER.nextLine();
         System.out.print("Gender: ");
         pet.setGender(Main.SCANNER.nextLine());
-        System.out.print("Owner Name: ");
-        pet.setOwnerName(Main.SCANNER.nextLine());
+        if(type.equals(dog_type)){
+            System.out.println("Size (xS / S / M / L / xxL): ");
+            ((Dog) pet).setSize(Main.SCANNER.nextLine());
+        }
         return pet;
     }
 
