@@ -2,10 +2,10 @@ package main.java.com.magicvet.model;
 
 import java.util.Objects;
 
-public class Pet {
+public abstract class Pet {
     private String type;
     private String gender;
-    private String age;
+    private int age;
     private String name;
     private String ownerName;
 
@@ -34,11 +34,11 @@ public class Pet {
         return Objects.hash(type, gender, age, name, ownerName);
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
