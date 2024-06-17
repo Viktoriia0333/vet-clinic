@@ -24,7 +24,7 @@ public class PetService {
     private Pet buildPet(String type){
         Pet pet = type.equals(cat_type) ? new Cat() : new Dog();
         pet.setType(type);
-        System.out.println("Your pet`s health state (notBad / Bad(2) / veryBad(3) / critical): ");
+        System.out.println("Your pet`s health state (notBad / Bad / veryBad / critical): ");
         String healthState = Main.SCANNER.nextLine();
         pet.setHealthState(Pet.HealthState.valueOf(healthState));
         System.out.print("Name: ");
@@ -40,16 +40,6 @@ public class PetService {
             ((Dog) pet).setSize(Dog.Size.valueOf(size));
         }
         return pet;
-    }
-
-    //function to ask client about adding pet after registration
-    public static boolean addPetAfterRegister(){
-        System.out.print("Do you want to add your pet now? (y/n): ");
-        String input = Main.SCANNER.nextLine();
-        if(input.equals("y")){
-            return  true;
-        }
-        return false;
     }
 
 }

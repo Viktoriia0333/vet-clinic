@@ -3,6 +3,8 @@ package main.java.com.magicvet.model;
 import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Client {
@@ -10,17 +12,17 @@ public class Client {
     private String email;
     private String FirstName;
     private String LastName;
-    private Pet pet;
+    private List<Pet> pets = new ArrayList<>();
     private final LocalDate registrationDate = LocalDate.now();
 
     @Override
     public String toString(){
         //if pet is not null -> print with pet information
-        return pet != null ?"Client:\nFirst name: "+ FirstName
+        return pets != null ?"Client:\nFirst name: "+ FirstName
                 +", last name: "+ LastName
                 +", email: "+ email
                 +", registration date: " + registrationDate
-                +"\nPet: " + pet
+                +"\nPet: " + pets
                 //else print that client don`t have pet yet
                 :
                 "Client:\nFirst name: "+ FirstName
@@ -38,12 +40,12 @@ public class Client {
         return Objects.equals(email, client.email)
                 && Objects.equals(FirstName, client.FirstName)
                 && Objects.equals(LastName, client.LastName)
-                && Objects.equals(pet, client.pet);
+                && Objects.equals(pets, client.pets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, FirstName, LastName, pet);
+        return Objects.hash(email, FirstName, LastName, pets);
     }
 
     public void setEmail(String email) {
@@ -70,11 +72,14 @@ public class Client {
         return LastName;
     }
 
-    public void setPet(Pet pet) {
-        this.pet = pet;
+    public void setPet(List<Pet> pets) {
+        this.pets = pets;
     }
 
-    public Pet getPet() {
-        return pet;
+    public List<Pet> getPets() {
+        return pets;
+    }
+    public void addPet(Pet pet){
+        pets.add(pet);
     }
 }
