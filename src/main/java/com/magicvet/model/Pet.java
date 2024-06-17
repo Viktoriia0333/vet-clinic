@@ -1,14 +1,18 @@
 package main.java.com.magicvet.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public abstract class Pet {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
     private HealthState healthState;
     private String type;
     private String gender;
     private int age;
     private String name;
     private String ownerName;
+    private final LocalDateTime registrationTime = LocalDateTime.now();
 
     @Override
     public String toString(){
@@ -16,7 +20,8 @@ public abstract class Pet {
                 +", name: " + name
                 +", age: " + age
                 +", gender: " + gender
-                +", health state: " + healthState;
+                +", health state: " + healthState
+                +", registration time: " + registrationTime.format(FORMATTER);
     }
 
     @Override

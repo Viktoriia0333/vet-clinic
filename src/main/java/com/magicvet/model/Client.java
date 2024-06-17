@@ -1,12 +1,17 @@
 package main.java.com.magicvet.model;
 
+import javax.swing.text.DateFormatter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Client {
+    private static final DateTimeFormatter clientFORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private String email;
     private String FirstName;
     private String LastName;
     private Pet pet;
+    private final LocalDate registrationDate = LocalDate.now();
 
     @Override
     public String toString(){
@@ -14,12 +19,14 @@ public class Client {
         return pet != null ?"Client:\nFirst name: "+ FirstName
                 +", last name: "+ LastName
                 +", email: "+ email
+                +", registration date: " + registrationDate
                 +"\nPet: " + pet
                 //else print that client don`t have pet yet
                 :
                 "Client:\nFirst name: "+ FirstName
                 +", last name: "+ LastName
                 +", email: "+ email
+                +", registration date: " + registrationDate.format(clientFORMATTER)
                 +"\nHas no registered pet yet.";
     }
 
