@@ -14,21 +14,9 @@ public class ClientService {
         System.out.print("Email: ");
         String email = Main.SCANNER.nextLine();
         if(emailValid(email)){
-            System.out.print("First Name: ");
-            String FirstName = Main.SCANNER.nextLine();
-            if(isFirstNameValid(FirstName)){
-                System.out.print("Last Name: ");
-                String LastName = Main.SCANNER.nextLine();
-                if(isLastNameValid(LastName)) {
-                    client = buildClient(email, FirstName, LastName);
-                    System.out.println("New client: " + client.getFirstName() + " " + client.getLastName()
+            client = buildClient(email);
+            System.out.println("New client: " + client.getFirstName() + " " + client.getLastName()
                             + " " + "(" + client.getEmail() + ").");
-                }else{
-                    System.out.println("Invalid last name");
-                }
-            }else{
-                System.out.println("Invalid first name");
-            }
         }else{
             System.out.println("Email is invalid");
         }
@@ -51,11 +39,26 @@ public class ClientService {
         return lastName_matcher.matches();
     }
 
-    static Client buildClient(String email, String FirstName, String LastName) {
+    static Client buildClient(String email) {
         Client client = new Client();
         client.setEmail(email);
-        client.setFirstName(FirstName);
-        client.setLastName(LastName);
+        System.out.print("First Name: ");
+        String FirstName = Main.SCANNER.nextLine();
+        if(isFirstNameValid(FirstName)){
+            client.setFirstName(FirstName);
+            System.out.print("Last Name: ");
+            String LastName = Main.SCANNER.nextLine();
+            if(isLastNameValid(LastName)) {
+                client.setLastName(LastName);
+            }else{
+                System.out.println("Invalid last name");
+            }
+        }else{
+            System.out.println("Invalid first name");
+        }
+        System.out.println("Location: ");
+        String location = Main.SCANNER.nextLine();
+        client.setLocation(Client.Location.valueOf(location));
         return client;
     }
 }
