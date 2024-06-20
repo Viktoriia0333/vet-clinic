@@ -2,6 +2,7 @@ package main.java.com.magicvet.service;
 
 import main.java.com.magicvet.Main;
 import main.java.com.magicvet.model.Cat;
+import main.java.com.magicvet.model.Client;
 import main.java.com.magicvet.model.Dog;
 import main.java.com.magicvet.model.Pet;
 
@@ -25,8 +26,16 @@ public class PetService {
         Pet pet = type.equals(cat_type) ? new Cat() : new Dog();
         pet.setType(type);
         System.out.println("Your pet`s health state (notBad / Bad / veryBad / critical): ");
-        String healthState = Main.SCANNER.nextLine();
-        pet.setHealthState(Pet.HealthState.valueOf(healthState));
+        Pet.HealthState healthState;
+        String healthInput = Main.SCANNER.nextLine();
+        try{
+            healthState = Pet.HealthState.valueOf(healthInput);
+        }catch (IllegalArgumentException e){
+            healthState = Pet.HealthState.UNKNOWN;
+            System.out.println("Unable to pars value '"+healthInput
+                    +"'. Using default value: "+ Pet.HealthState.UNKNOWN);
+        }
+        pet.setHealthState(healthState);
         System.out.print("Name: ");
         pet.setName(Main.SCANNER.nextLine());
         System.out.print("Age:");
@@ -36,8 +45,16 @@ public class PetService {
         pet.setGender(Main.SCANNER.nextLine());
         if(type.equals(dog_type)){
             System.out.println("Size (XS / S / M / L / XL): ");
-            String size = Main.SCANNER.nextLine();
-            ((Dog) pet).setSize(Dog.Size.valueOf(size));
+            Dog.Size size;
+            String sizeInput = Main.SCANNER.nextLine();
+            try{
+                size = Dog.Size.valueOf(sizeInput);
+            }catch (IllegalArgumentException e){
+                size = Dog.Size.UNKNOWN;
+                System.out.println("Unable to pars value '"+sizeInput
+                        +"'. Using default value: "+ Client.Location.UNKNOWN);
+            }
+            ((Dog) pet).setSize(size);
         }
         return pet;
     }

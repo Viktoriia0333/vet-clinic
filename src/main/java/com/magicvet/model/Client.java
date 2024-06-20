@@ -87,6 +87,6 @@ public class Client {
         pets.add(pet);
     }
     public enum Location{
-        KYIV, LVIV, ODESA;
+        KYIV, LVIV, ODESA, UNKNOWN
     }
 }
