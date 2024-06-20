@@ -92,7 +92,8 @@ public abstract class Pet {
         notBad(1),
         Bad(2),
         veryBad(3),
-        critical(4);
+        critical(4),
+        UNKNOWN(0);
         private final int healthValue;
         HealthState(int value){
             this.healthValue = value;
